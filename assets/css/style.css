@@ -1,0 +1,61 @@
+body {
+    background-image: url("../images/pink_rice.png");
+}
+
+
+h1 {
+    font-family: 'Monoton', cursive;
+    font-size: 4em;
+    color: #666666;
+}
+
+
+#dateTime {
+    font-size: 1.5em;
+}
+
+input {
+    height: 3em;
+}
+
+footer {
+    background-color: #666666;
+    color: #ffffff;
+    border-top: 4px solid #ffffff;
+}
+
+/* adjust the width of the container according to the screen size */
+/* extra small screen */
+@media screen and (max-width: 575px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/*  small screen */
+@media screen and (min-width: 576px) {
+    .container {
+        width: 80%;
+    }
+}
+
+/* medium screen */
+@media screen and (min-width: 768px) {
+    .container {
+        width: 70%;
+    }
+}
+
+/* large screen */
+@media screen and (min-width: 992px) {
+    .container {
+        width: 75%;
+    }
+}
+
+/* extra large screen */
+@media screen and (min-width: 1200px) {
+    .container {
+        width: 60%;
+    }
+}
