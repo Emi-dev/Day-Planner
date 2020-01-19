@@ -1,41 +1,75 @@
+// global variable declarations
 var today = $("#dateTime");
-today.text(moment().format('llll'));
-
 // array of schedule objects
 var dayPlanner = [];
 // assign localStorage data (dayPlanner arrayo of objects) to storedPlanner variable
 var storedPlanner = JSON.parse(localStorage.getItem("dayPlanner"));
+
+// display date and time in header (format: Sat, Jan 18, 2020 10:35 PM)
+today.text(moment().format('llll'));
+
+// if the data exists in localStorage, assign the data (array) to dayPlanner (array)
 if(storedPlanner) {
     dayPlanner = storedPlanner;
 }
 
-for(var i = 9; i < 19; i++) {
-    // create division to show time for each slot
-    var timeDiv = $("<div>");
-    timeDiv.addClass("col-2 text-center py-2 time-div").attr("data-time", i).text(i + ":00");
+// build day planner
+buildPlanner();
 
-    // create input element for each time slot
-    var inputEl = $("<input>");
-    inputEl.addClass("col-9 rounded input-el").attr({type: "text", "data-time": i});
+function buildPlanner() {
+    //get hour (format: 22 - for 10PM)
+    var hour = moment().hour();
 
-    // create save button for each time slot
-    var saveImg = $("<img>");
-    saveImg.addClass("img-fluid text-left").attr("src","./assets/images/save.png");
-    var saveBtn = $("<button>");
-    saveBtn.addClass("col-1 btn btn-outline-secondary btn-sm rounded p-0").attr({type: "submit", "data-time": i}).append(saveImg);
+    for(var i = 9; i < 18; i++) {
+        // create division to show timeblock for each slot
+        var timeDiv = $("<div>");
+        var dispTime;
+        var isAM = i >= 9 && i < 12;
 
-    // create row to append the columns (time, input, button)
-    var row = $("<div>");
-    row.addClass("row").attr("data-time", i).append(timeDiv, inputEl, saveBtn);
-
-    // append the rows to the division
-    $("#scheduler").append(row);
+        if(isAM) {  //if it's AM
+            dispTime = i + " AM";
+        } else if(i === 12) {
+            dispTime = i + " PM";
+        } else {
+            dispTime = (i - 12) + " PM";
+        }
+        // set the timeblock column classes, attribute, and text
+        timeDiv.addClass("col-2 text-center py-2 time-div").attr("data-time", i).text(dispTime);
     
-    if(storedPlanner) {    // if localStorage data exists
-        inputEl.val(dayPlanner[i - 9].plan);
-    } else {    // if localStorage data doesn't exist
-        var scheduleObj = {time: i, plan: inputEl.text()};
-        dayPlanner.push(scheduleObj);
+        // create input element for each timelock
+        var inputEl = $("<input>");
+        var bgColor;
+        // set background color of input element depending on timeblock
+        if(i < hour) {
+            bgColor = "#aeb3b9";
+        } else if(i === hour) {
+            bgColor = "#e4266a";
+        } else {
+            bgColor = "#94d8d0";
+        }
+        // set the input column classes, attributes, and css properties
+        inputEl.addClass("col-9 rounded input-el").attr({type: "text", "data-time": i}).css({"background-color": bgColor, "height": "inherit"});
+    
+        // create save button for each timeblock
+        var saveImg = $("<img>");
+        saveImg.addClass("img-fluid text-left").attr("src","./assets/images/save.png");
+        var saveBtn = $("<button>");
+        // set the save button classes and attributes, and append the image to it
+        saveBtn.addClass("col-1 btn btn-outline-secondary btn-sm rounded p-0").attr({type: "submit", "data-time": i}).append(saveImg);
+    
+        // create row to append the columns (time, input, button)
+        var row = $("<div>");
+        row.addClass("row").attr("data-time", i).append(timeDiv, inputEl, saveBtn);
+    
+        // append the rows to the division
+        $("#scheduler").append(row);
+        
+        if(storedPlanner) {    // if localStorage data exists
+            inputEl.val(dayPlanner[i - 9].plan);
+        } else {    // if localStorage data doesn't exist
+            var scheduleObj = {time: i, plan: inputEl.text()};
+            dayPlanner.push(scheduleObj);
+        }
     }
 }
 
