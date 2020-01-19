@@ -34,7 +34,7 @@ function buildPlanner() {
             dispTime = (i - 12) + " PM";
         }
         // set the timeblock column classes, attribute, and text
-        timeDiv.addClass("col-2 text-center py-2 time-div").attr("data-time", i).text(dispTime);
+        timeDiv.addClass("col-2 text-center py-2 time-div").attr("data-time", i).css({"font-family": "'Alegreya Sans', sans-serif", "color": "#663e5e"}).text(dispTime);
     
         // create input element for each timelock
         var inputEl = $("<input>");
@@ -48,7 +48,7 @@ function buildPlanner() {
             bgColor = "#94d8d0";
         }
         // set the input column classes, attributes, and css properties
-        inputEl.addClass("col-9 rounded input-el").attr({type: "text", "data-time": i}).css({"background-color": bgColor, "height": "inherit"});
+        inputEl.addClass("col-9 rounded input-el").attr({type: "text", "data-time": i}).css({"font-family": "'Ubuntu', sans-serif", "background-color": bgColor, "height": "inherit"});
     
         // create save button for each timeblock
         var saveImg = $("<img>");

@@ -9,7 +9,9 @@ h1 {
 }
 
 #dateTime {
+    font-family: 'IM Fell Great Primer SC', serif;
     font-size: 1.5em;
+    color: #663e5e;
 }
 
 .time-div {
