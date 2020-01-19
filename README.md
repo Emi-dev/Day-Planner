@@ -10,6 +10,10 @@ This is a simple calendar application that allows the user to save events for ea
 The user can enter the plan/schedule in the input field of each timeblock.
 The input data (schedule) gets saved in localStorage when the save button next to each timeblock is clicked.
 The user needs to update the data by clicking the save button when clear the data also.
+The input field's background color changes depending on time:
+- past timeblock: grey
+- current timeblock: red
+- future timeblock: green
 
 ![Day Planner](assets/images/dayPlanner.png)
 
