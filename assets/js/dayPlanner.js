@@ -20,6 +20,7 @@ function buildPlanner() {
     //get hour (format: 22 - for 10PM)
     var hour = moment().hour();
 
+    // creating rows for timeblocks from 9AM to 5PM(17)
     for(var i = 9; i < 18; i++) {
         // create division to show timeblock for each slot
         var timeDiv = $("<div>");
@@ -41,11 +42,11 @@ function buildPlanner() {
         var bgColor;
         // set background color of input element depending on timeblock
         if(i < hour) {
-            bgColor = "#aeb3b9";
+            bgColor = "#aeb3b9";    // gray
         } else if(i === hour) {
-            bgColor = "#e4266a";
+            bgColor = "#e4266a";    // red
         } else {
-            bgColor = "#94d8d0";
+            bgColor = "#94d8d0";    //green
         }
         // set the input column classes, attributes, and css properties
         inputEl.addClass("col-9 rounded input-el").attr({type: "text", "data-time": i}).css({"font-family": "'Ubuntu', sans-serif", "background-color": bgColor, "height": "inherit"});
